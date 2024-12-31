@@ -2,6 +2,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "tree.h"
+
+// global data
+tree_t *treeGame;
 
 // display the user menu
 uint8_t displayMenu(void) {
@@ -14,6 +18,7 @@ uint8_t displayMenu(void) {
     "4) Quit\n");      
 
     printf("Select an option: ");
+    printf("\n>");
     scanf("%c", &option);
     return option;
 }
@@ -43,6 +48,14 @@ int main() {
     while (valid != 1) {
         currOption = displayMenu();
         if (isInRange(currOption)) {
+            // dbg this need to be changed to a state machine with a switch
+            treeGame = initTreeLogic();
+            printf("[DBG]: root => question => %s\n", treeGame->data->question);
+            printf("[DBG]: root => animal => %s\n", treeGame->data->animal);
+            printf("[DBG]: root => yes => question => %s\n", treeGame->yes->data->question);
+            printf("[DBG]: root => yes => animal => %s\n", treeGame->yes->data->animal);
+            printf("[DBG]: root => no => question => %s\n", treeGame->no->data->question);
+            printf("[DBG]: root => no => animal => %s\n", treeGame->no->data->animal);
             valid = 1;
         } else {
             valid = 0;
