@@ -56,6 +56,14 @@ int main() {
             printf("[DBG]: root => yes => animal => %s\n", treeGame->yes->data->animal);
             printf("[DBG]: root => no => question => %s\n", treeGame->no->data->question);
             printf("[DBG]: root => no => animal => %s\n", treeGame->no->data->animal);
+            // missing to release the memory
+            free(treeGame->yes->data);
+            free(treeGame->yes);
+            free(treeGame->no->data);
+            free(treeGame->no);
+            free(treeGame->data);
+            free(treeGame);
+
             valid = 1;
         } else {
             valid = 0;
